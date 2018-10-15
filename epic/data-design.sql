@@ -44,3 +44,5 @@ CREATE TABLE shopping_cart (
 
    PRIMARY KEY(shopCartProfileID, shopCartProductMrfNumID)
 );
+
+
