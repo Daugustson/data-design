@@ -19,8 +19,8 @@ CREATE TABLE profile (
 
 CREATE TABLE product (
       productMrfNumID BINARY(128) NOT NULL,
-      productDigikeyPartNumber VARCHAR(128),
-      productQuantityAvailable VARCHAR(128),
+      productDigikeyPartNumber VARCHAR(64),
+      productQuantityAvailable VARCHAR(16),
       productManufacturerName TEXT(128),
       productDescription TEXT(128),
       productManufacturerLeadTime VARCHAR(64),
@@ -32,8 +32,8 @@ CREATE TABLE product (
 CREATE TABLE shopping_cart (
       shopCartProfileID BINARY(16),
       shopCartProductMrfNumID VARCHAR(64),
-      shopCartQuantity VARCHAR(64),
-      shopCartPartNumber VARCHAR(128),
+      shopCartQuantity VARCHAR(16),
+      shopCartPartNumber VARCHAR(64),
       shopCartCustomerReference VARCHAR(64),
 
       INDEX(shopCartProfileID),

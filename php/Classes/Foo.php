@@ -95,7 +95,7 @@ class shopping_cart {
 	 * accessor method for shopCartProductMrfNum ID
 	 * @return string value of shopCartProductMrfNum ID
 	 */
-	public function shopCartProductMrfNumID(): string{
+	public function getshopCartProductMrfNumID(): string{
 		return ($this->shopCartProductMrfNumID);
 	}
 
@@ -103,10 +103,6 @@ class shopping_cart {
 	 * @param string $newshopCartProductMrfNumID new value of Product part Number
 	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string or insecure
 	 * @throws \RangeException if $newshopCartProductMrfNumID is >64 characters
-	 *
-	 */
-	/**
-	 * @param string $shopCartProductMrfNumID
 	 */
 	public function setShopCartProductMrfNumID(string $newshopCartProductMrfNumID) {
 		// verify the setShopCartProductMrfNumID content is secure
@@ -124,9 +120,24 @@ class shopping_cart {
 		//* store the Mrf part number
 		$this->shopCartProductMrfNumID = $newshopCartProductMrfNumID;
 
-
-
 	}
+
+	/**
+	 * accessor method for shop Cart Quantity
+	 * @return string value of shopCartQuantity
+	 */
+	public function getshopCartQuantity(): string {
+		return ($this->shopCartQuantity);
+	}
+
+	/** mutator method for shopCartProductMrfNumID
+	 * @param string $newshopCartQuantity new value of Product part Number
+	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
+	 * @throws \RangeException if $newshopCartQuantity is >128 characters
+	 */
+
+
+
 
 
 
