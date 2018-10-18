@@ -1,6 +1,9 @@
 <?php
 namespace daugustson\DataDesign;
 
+require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
+
+use Ramsey\Uuid\Uuid;
 
 
 class shopping_cart {
@@ -33,6 +36,19 @@ class shopping_cart {
 	 * @var string
 	 */
        private $shopCartCustomerReference;
+
+       /**
+		  * @param string|uuid $shopCartProfileID id of the profile ID
+		  * @param string|uuid $shopCartProductMrfNumID id of the Mfr part number
+		  * @param string $shopCartQuantity string amount of product in shopping cart
+		  * @param string $shopCartPartNumber string digkey part/config you have in your cart
+		  * @param string $shopCartCustomerReference string customer order ref number
+		  *
+		  * @throws \InvalidArgumentException if data types are not valid
+		  * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+		  * @throws \TypeError if data types violate type hints
+		  * @throws \Exception if some other exception occurs
+		  */
 
 
 
