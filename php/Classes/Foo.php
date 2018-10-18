@@ -3,6 +3,7 @@ namespace daugustson\DataDesign;
 
 require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
 
+use http\Exception\BadQueryStringException;
 use Ramsey\Uuid\Uuid;
 
 
@@ -102,9 +103,15 @@ class shopping_cart {
 	 * @param string $newshopCartProductMrfNumID new value of Product part Number
 	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string
 	 * @throws \RangeException if $newshopCartProductMrfNumID is >64 characters
-	 * @throws \TypeError if
-	 *
+	 * @throws \TypeError if $newshopCartProductMrfNumID is not a BadQueryStringException
 	 */
+	/**
+	 * @param string $shopCartProductMrfNumID
+	 */
+	public function setShopCartProductMrfNumID(string $shopCartProductMrfNumID) {
+		$this->shopCartProductMrfNumID = $shopCartProductMrfNumID;
+
+	}
 
 
 
