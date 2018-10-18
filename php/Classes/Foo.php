@@ -58,7 +58,7 @@ class shopping_cart {
 				$this->setshopCartCustomerReference($newshopCartCustomerReference);
 			}
 			    //determine what exception type was thrown
-			 catch(\InvalidArgumentException | \RangeException | \TypeError | \exception
+			 catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
 			 $exception) {
        		$exceptiontype = get_class($exception);
        		throw(new $exceptiontype($exception->getMessage(), 0, $exception));
@@ -76,7 +76,19 @@ class shopping_cart {
 		  * mutator method for shopCartProfile ID
 		  * @param Uuid | string $newshopCartProfileID new value of shopCartProfile ID
 		  * @throws \ RangeException if $newshopCartProfileID is not positive
-		  */
+		  * @throws \ TypeError if $newshopCartProfileID is not a uuid or string
+		  **/
+	    public function setshopCartProfileID($newshopCartProfileID) : void {
+			 try {
+				 $uuid = self::validatedUnid($newshopCartProfileID);
+			 } catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
+			 $exception) {
+
+			 }
+			 // convert and store for shopCartProfile ID
+			 $this->getShopCartProfileID = $uuid;
+		 }
+
 
 
 
