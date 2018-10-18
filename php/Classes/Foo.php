@@ -101,15 +101,30 @@ class shopping_cart {
 
 	/** mutator method for shopCartProductMrfNumID
 	 * @param string $newshopCartProductMrfNumID new value of Product part Number
-	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string
+	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string or insecure
 	 * @throws \RangeException if $newshopCartProductMrfNumID is >64 characters
-	 * @throws \TypeError if $newshopCartProductMrfNumID is not a BadQueryStringException
+	 *
 	 */
 	/**
 	 * @param string $shopCartProductMrfNumID
 	 */
-	public function setShopCartProductMrfNumID(string $shopCartProductMrfNumID) {
-		$this->shopCartProductMrfNumID = $shopCartProductMrfNumID;
+	public function setShopCartProductMrfNumID(string $newshopCartProductMrfNumID) {
+		// verify the setShopCartProductMrfNumID content is secure
+		$newshopCartProductMrfNumID = trim($newshopCartProductMrfNumID);
+		$newshopCartProductMrfNumID = filter_var($newshopCartProductMrfNumID, filter_sanitize_string,
+			filter_flag_no_encode_quote);
+		if(empty($newshopCartProductMrfNumID) === true) {
+			throw(new \InvalidArgumentException ("Part number content is empty or insecure"));
+		}
+		//verify the mrf number will fit in the datebase
+		if(strlen($newshopCartProductMrfNumID)>= 64){
+			throw(new \RangeException("Mrf part number is to long"));
+		}
+
+		//* store the Mrf part number
+		$this->shopCartProductMrfNumID = $newshopCartProductMrfNumID;
+
+
 
 	}
 
