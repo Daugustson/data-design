@@ -18,7 +18,7 @@ class shopping_cart {
 		 * this ID is for the shopCartProductMrfNum:
 		 *this is a foreign key that is references to
 		 *product(productMrfNumID)
-		 * @var Uuid shopCartProductMrfNumID
+		 * @var string shopCartProductMrfNumID
 		 */
       private $shopCartProductMrfNumID;
       /**
@@ -39,7 +39,7 @@ class shopping_cart {
 
        /**
 		  * @param string|uuid $shopCartProfileID id of the profile ID
-		  * @param string|uuid $shopCartProductMrfNumID id of the Mfr part number
+		  * @param string $shopCartProductMrfNumID id of the Mfr part number
 		  * @param string $shopCartQuantity string amount of product in shopping cart
 		  * @param string $shopCartPartNumber string digkey part/config you have in your cart
 		  * @param string $shopCartCustomerReference string customer order ref number
@@ -51,17 +51,38 @@ class shopping_cart {
        public function _construct($shopCartProfileID, $shopCartProductMrfNumID, $shopCartQuantity,
 											 $shopCartPartNumber, $shopCartCustomerReference){
        	try {
-       		$this->setshopCartProfileID($shopCartProfileID);
-				$this->setshopCartProductMrfNumID($shopCartProductMrfNumID);
-				$this->setshopCartQuantity($shopCartQuantity);
-				$this->setshopCartPartNumber($shopCartPartNumber);
-				$this->setshopCartCustomerReference($shopCartCustomerReference);
+       		$this->setshopCartProfileID($newshopCartProfileID);
+				$this->setshopCartProductMrfNumID($newshopCartProductMrfNumID);
+				$this->setshopCartQuantity($newshopCartQuantity);
+				$this->setshopCartPartNumber($newshopCartPartNumber);
+				$this->setshopCartCustomerReference($newshopCartCustomerReference);
 			}
 			    //determine what exception type was thrown
-			 catch(\InvalidArgumentException | \RangeException | \TypeError | \xception
-			 $exception)
+			 catch(\InvalidArgumentException | \RangeException | \TypeError | \exception
+			 $exception) {
+       		$exceptiontype = get_class($exception);
+       		throw(new $exceptiontype($exception->getMessage(), 0, $exception));
+			 }
+       }
+		 /**
+		  * accessor method for shopCartProfile ID
+		  * @return Unid value of shopCartProfile ID
+		  */
+	    public function getShopCartProfileID(): Uuid {
+		return ($this->shopCartProfileID);
+	    }
 
-		 }
+	    /**
+		  * mutator method for shopCartProfile ID
+		  * @param Uuid | string $newshopCartProfileID new value of shopCartProfile ID
+		  * @throws \ RangeException if $newshopCartProfileID is not positive
+		  */
+
+
+
+
+
+
 
 
 
