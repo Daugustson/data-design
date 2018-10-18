@@ -43,12 +43,25 @@ class shopping_cart {
 		  * @param string $shopCartQuantity string amount of product in shopping cart
 		  * @param string $shopCartPartNumber string digkey part/config you have in your cart
 		  * @param string $shopCartCustomerReference string customer order ref number
-		  *
 		  * @throws \InvalidArgumentException if data types are not valid
 		  * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 		  * @throws \TypeError if data types violate type hints
 		  * @throws \Exception if some other exception occurs
 		  */
+       public function _construct($shopCartProfileID, $shopCartProductMrfNumID, $shopCartQuantity,
+											 $shopCartPartNumber, $shopCartCustomerReference){
+       	try {
+       		$this->setshopCartProfileID($shopCartProfileID);
+				$this->setshopCartProductMrfNumID($shopCartProductMrfNumID);
+				$this->setshopCartQuantity($shopCartQuantity);
+				$this->setshopCartPartNumber($shopCartPartNumber);
+				$this->setshopCartCustomerReference($shopCartCustomerReference);
+			}
+			    //determine what exception type was thrown
+			 catch(\InvalidArgumentException | \RangeException | \TypeError | \xception
+			 $exception)
+
+		 }
 
 
 
