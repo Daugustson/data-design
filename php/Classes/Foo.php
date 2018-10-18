@@ -133,8 +133,24 @@ class shopping_cart {
 	/** mutator method for shopCartProductMrfNumID
 	 * @param string $newshopCartQuantity new value of Product part Number
 	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
-	 * @throws \RangeException if $newshopCartQuantity is >128 characters
+	 * @throws \RangeException if $newshopCartQuantity is >16 characters
 	 */
+	public function setShopCartQuantity(string $shopCartQuantity): void {
+		// verify the quantity is secure
+		$newshopCartQuantity = trim($newshopCartQuantity);
+		$newshopCartQuantity = filter_var($newshopCartQuantity, FILTER_SANITIZE_STRING,
+			FILTER_FLAG_NO_ENCODE_QUOTES));
+      if(empty($newshopCartQuantity) === true) {
+      	throw (new \InvalidArgumentException(" Specify quantity need"));
+		}
+
+		// verify the quantity content will fit in the database
+		if(strlen($newshopCartQuantity) >= 16) {
+			throw(new \RangeException("quantity is to large contact digikey"));
+		}
+		//store shopCartQuantity content
+		$this->shopCartQuantity = $newshopCartQuantity;
+	}
 
 
 
