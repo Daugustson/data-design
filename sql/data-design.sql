@@ -31,7 +31,7 @@ CREATE TABLE product (
 
 CREATE TABLE shopping_cart (
       shopCartProfileID BINARY(16),
-      shopCartProductMrfNumID BINARY(16),
+      shopCartProductMrfNumID VARCHAR(64),
       shopCartQuantity VARCHAR(64),
       shopCartPartNumber VARCHAR(128),
       shopCartCustomerReference VARCHAR(64),

@@ -86,8 +86,25 @@ class shopping_cart {
 
 			 }
 			 // convert and store for shopCartProfile ID
-			 $this->getShopCartProfileID = $uuid;
+			 $this->ShopCartProfileID = $uuid;
+
 		 }
+
+	/**
+	 * accessor method for shopCartProductMrfNum ID
+	 * @return string value of shopCartProductMrfNum ID
+	 */
+	public function shopCartProductMrfNumID(): string{
+		return ($this->shopCartProductMrfNumID);
+	}
+
+	/** mutator method for shopCartProductMrfNumID
+	 * @param string $newshopCartProductMrfNumID new value of Product part Number
+	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string
+	 * @throws \RangeException if $newshopCartProductMrfNumID is >64 characters
+	 * @throws \TypeError if
+	 *
+	 */
 
 
 
