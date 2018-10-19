@@ -131,7 +131,7 @@ class shopping_cart {
 	}
 
 	/** mutator method for shopCartProductMrfNumID
-	 * @param string $newshopCartQuantity new value of Product part Number
+	 * @param string $newshopCartQuantity new value of Product Mrf part Number
 	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
 	 * @throws \RangeException if $newshopCartQuantity is >16 characters
 	 */
@@ -149,8 +149,22 @@ class shopping_cart {
 			throw(new \RangeException("quantity is to large contact digikey"));
 		}
 		//store shopCartQuantity content
-		$this->shopCartQuantity = $newshopCartQuantity;
+		$this->shopCartQuantity = $shopCartQuantity;
 	}
+
+	/**
+	 * accessor method for shop Cart part number
+	 * @return string value of shopCartPartNumber
+	 */
+	public function getshopCartPartNumber(): string {
+		return ($this->shopCartPartNumber);
+	}
+
+	/** mutator method for shopCartPartNumber
+	 * @param string $newshopCartPartNumber new value of shop Cart digkey Part Number
+	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
+	 * @throws \RangeException if $newshopCartPartNumber is >16 characters
+	 */
 
 
 
