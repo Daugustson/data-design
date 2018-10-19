@@ -166,7 +166,22 @@ class shopping_cart {
 	 * @throws \RangeException if $newshopCartPartNumber is >16 characters
 	 */
 
+	/**
+	 * @param string $shopCartPartNumber
+	 */
+	public function setShopCartPartNumber(string $newshopCartPartNumber) : void {
+		//verify the shop cart part number
+		$newsetShopCartPartNumber = trim($newsetShopCartPartNumber);
+		$setShopCartPartNumber = filter_var($setShopCartPartNumber, filter_sanintiize_string,
+			filter_flag_no_encode_quotes);
 
+
+
+
+
+
+		$this->shopCartPartNumber = $shopCartPartNumber;
+	}
 
 
 
