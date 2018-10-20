@@ -1,9 +1,9 @@
 <?php
-namespace daugustson\DataDesign;
+namespace daugustson\data-design;
 
 require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
 
-use http\Exception\BadQueryStringException;
+
 use Ramsey\Uuid\Uuid;
 
 
@@ -67,7 +67,7 @@ class shopping_cart {
        }
 		 /**
 		  * accessor method for shopCartProfile ID
-		  * @return Unid value of shopCartProfile ID
+		  * @return Uuid value of shopCartProfile ID
 		  */
 	    public function getShopCartProfileID(): Uuid {
 		return ($this->shopCartProfileID);
@@ -181,7 +181,7 @@ class shopping_cart {
 		//store the part number
 		$this->shopCartPartNumber = $newshopCartPartNumber;
 	}
-**********************************************************************************************************************
+
 
 	/**
 	 * accessor method for shop Cart Customer Ref number
@@ -212,15 +212,5 @@ class shopping_cart {
 		//store the part number
 		$this->shopCartPartNumber = $$newshopCartCustomerReference;
 	}
-
-
-
-
-
-
-
-
-
-
 }
 
