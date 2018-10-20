@@ -165,26 +165,53 @@ class shopping_cart {
 	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
 	 * @throws \RangeException if $newshopCartPartNumber is >16 characters
 	 */
-
-	/**
-	 * @param string $shopCartPartNumber
-	 */
 	public function setShopCartPartNumber(string $newshopCartPartNumber) : void {
 		//verify the shop cart part number
 		$newsetShopCartPartNumber = trim($newsetShopCartPartNumber);
-		$setShopCartPartNumber = filter_var($setShopCartPartNumber, filter_sanintiize_string,
+		$setShopCartPartNumber = filter_var($newShopCartPartNumber, filter_sanintiize_string,
 			filter_flag_no_encode_quotes);
+		if(empty($newshopCartPartNumber) ===true){
+			throw(new \InvalidArgumentException("Enter part number"));
+		}
 
+		//verify the shop cart part number will fit in the date base
+		if(stflen($newshopCartPartNumber) >= 16){
+			throw(new \\RangeException(part number is too long));
+		}
+		//store the part number
+		$this->shopCartPartNumber = $newshopCartPartNumber;
+	}
+**********************************************************************************************************************
 
-
-
-
-
-		$this->shopCartPartNumber = $shopCartPartNumber;
+	/**
+	 * accessor method for shop Cart Customer Ref number
+	 * @return string value of  shopCartCustomerReferenc
+	 */
+	public function getshopCartCustomerReference(): string {
+		return ($this-> shopCartCustomerReference);
 	}
 
+	/** mutator method for  shopCartCustomerReference
+	 * @param string $newshopCartCustomerReference new value of customer Ref number
+	 * @throws \InvalidArgumentException if $newshopCartCustomerReference is not a string or insecure
+	 * @throws \RangeException if $newshopCartCustomerReference is >64 characters
+	 */
+	public function setshopCartCustomerReference(string $newshopCartCustomerReference) : void {
+		//verify the customer reference number
+		$newshopCartCustomerReference = trim($newshopCartCustomerReference);
+		$newshopCartCustomerReference = filter_var($newshopCartCustomerReference, filter_sanintiize_string,
+			filter_flag_no_encode_quotes);
+		if(empty($$newshopCartCustomerReference) ===true){
+			throw(new \InvalidArgumentException("Need Reference number"));
+		}
 
-
+		//verify the shop cart part number will fit in the date base
+		if(stflen($$newshopCartCustomerReference) >= 64){
+			throw(new \\RangeException(part number is too long));
+		}
+		//store the part number
+		$this->shopCartPartNumber = $$newshopCartCustomerReference;
+	}
 
 
 
