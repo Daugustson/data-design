@@ -7,7 +7,7 @@ require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
 use Ramsey\Uuid\Uuid;
 
 
-class shopping_cart {
+class shopping_cart  {
 	use ValidateUuid;
 	use ValidateDate;
 

@@ -1,9 +1,6 @@
 <?php
 namespace daugustson\datadesign;
-
 require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
-
-
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -14,7 +11,7 @@ use Ramsey\Uuid\Uuid;
  * 1. human readable string (36 bytes)
  * 2. binary string (16 bytes)
  * 3. Ramsey\Uuid\Uuid object
- *
+ **/
 
 trait ValidateUuid {
 	/**
