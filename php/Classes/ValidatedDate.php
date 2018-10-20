@@ -1,5 +1,10 @@
 <?php
-namespace daugustson\data-design;
+namespace daugustson\datadesign;
+
+require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
+
+
+use Ramsey\Uuid\Uuid;
 
 
 /**

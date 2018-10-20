@@ -1,5 +1,5 @@
 <?php
-namespace daugustson\data-design;
+namespace daugustson\datadesign;
 
 require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
 
@@ -8,6 +8,9 @@ use Ramsey\Uuid\Uuid;
 
 
 class shopping_cart {
+	use ValidateUuid;
+	use ValidateDate;
+
       /**
 		 * *this ID for the shopCartProfile:
 		 * this is a foreign key that is references to
@@ -39,7 +42,7 @@ class shopping_cart {
        private $shopCartCustomerReference;
 
        /**
-		  * @param string|uuid $shopCartProfileID id of the profile ID
+		  * @param string|Uuid $shopCartProfileID id of the profile ID
 		  * @param string $shopCartProductMrfNumID id of the Mfr part number
 		  * @param string $shopCartQuantity string amount of product in shopping cart
 		  * @param string $shopCartPartNumber string digkey part/config you have in your cart
@@ -104,11 +107,11 @@ class shopping_cart {
 	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string or insecure
 	 * @throws \RangeException if $newshopCartProductMrfNumID is >64 characters
 	 */
-	public function setShopCartProductMrfNumID(string $newshopCartProductMrfNumID) {
+	public function setshopCartProductMrfNumID(string $newshopCartProductMrfNumID): void {
 		// verify the setShopCartProductMrfNumID content is secure
 		$newshopCartProductMrfNumID = trim($newshopCartProductMrfNumID);
-		$newshopCartProductMrfNumID = filter_var($newshopCartProductMrfNumID, filter_sanitize_string,
-			filter_flag_no_encode_quote);
+		$newshopCartProductMrfNumID = filter_var($newshopCartProductMrfNumID, FILTER_SANITIZE_STRING,
+			FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newshopCartProductMrfNumID) === true) {
 			throw(new \InvalidArgumentException ("Part number content is empty or insecure"));
 		}
@@ -135,11 +138,11 @@ class shopping_cart {
 	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
 	 * @throws \RangeException if $newshopCartQuantity is >16 characters
 	 */
-	public function setShopCartQuantity(string $shopCartQuantity): void {
+	public function setShopCartQuantity(string $newshopCartQuantity): void {
 		// verify the quantity is secure
 		$newshopCartQuantity = trim($newshopCartQuantity);
 		$newshopCartQuantity = filter_var($newshopCartQuantity, FILTER_SANITIZE_STRING,
-			FILTER_FLAG_NO_ENCODE_QUOTES));
+			FILTER_FLAG_NO_ENCODE_QUOTES);
       if(empty($newshopCartQuantity) === true) {
       	throw (new \InvalidArgumentException(" Specify quantity need"));
 		}
@@ -149,7 +152,7 @@ class shopping_cart {
 			throw(new \RangeException("quantity is to large contact digikey"));
 		}
 		//store shopCartQuantity content
-		$this->shopCartQuantity = $shopCartQuantity;
+		$this->shopCartQuantity = $newshopCartQuantity;
 	}
 
 	/**
@@ -167,16 +170,16 @@ class shopping_cart {
 	 */
 	public function setShopCartPartNumber(string $newshopCartPartNumber) : void {
 		//verify the shop cart part number
-		$newsetShopCartPartNumber = trim($newsetShopCartPartNumber);
-		$setShopCartPartNumber = filter_var($newShopCartPartNumber, filter_sanintiize_string,
-			filter_flag_no_encode_quotes);
+		$newShopCartPartNumber = trim($newshopCartPartNumber);
+		$newShopCartPartNumber = filter_var($newShopCartPartNumber, FILTER_SANITIZE_STRING,
+			FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newshopCartPartNumber) ===true){
 			throw(new \InvalidArgumentException("Enter part number"));
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(stflen($newshopCartPartNumber) >= 16){
-			throw(new \\RangeException(part number is too long));
+		if(strlen($newshopCartPartNumber) >= 16){
+			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
 		$this->shopCartPartNumber = $newshopCartPartNumber;
@@ -199,15 +202,15 @@ class shopping_cart {
 	public function setshopCartCustomerReference(string $newshopCartCustomerReference) : void {
 		//verify the customer reference number
 		$newshopCartCustomerReference = trim($newshopCartCustomerReference);
-		$newshopCartCustomerReference = filter_var($newshopCartCustomerReference, filter_sanintiize_string,
-			filter_flag_no_encode_quotes);
+		$newshopCartCustomerReference = filter_var($newshopCartCustomerReference, FILTER_SANITIZE_STRING,
+			FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($$newshopCartCustomerReference) ===true){
 			throw(new \InvalidArgumentException("Need Reference number"));
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(stflen($$newshopCartCustomerReference) >= 64){
-			throw(new \\RangeException(part number is too long));
+		if(strlen($$newshopCartCustomerReference) >= 64){
+			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
 		$this->shopCartPartNumber = $$newshopCartCustomerReference;
