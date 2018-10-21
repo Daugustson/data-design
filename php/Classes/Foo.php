@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 
 class shopping_cart  {
 	use ValidateUuid;
-	use ValidateDate;
+
 
       /**
 		 * *this ID for the shopCartProfile:
@@ -52,14 +52,14 @@ class shopping_cart  {
 		  * @throws \TypeError if data types violate type hints
 		  * @throws \Exception if some other exception occurs
 		  */
-       public function _construct($shopCartProfileID, $shopCartProductMrfNumID, $shopCartQuantity,
-											 $shopCartPartNumber, $shopCartCustomerReference){
+       public function _construct($newShopCartProfileID, $newShopCartProductMrfNumID, $newShopCartQuantity,
+											 $newShopCartPartNumber, $newShopCartCustomerReference){
        	try {
-       		$this->setshopCartProfileID($newshopCartProfileID);
-				$this->setshopCartProductMrfNumID($newshopCartProductMrfNumID);
-				$this->setshopCartQuantity($newshopCartQuantity);
-				$this->setshopCartPartNumber($newshopCartPartNumber);
-				$this->setshopCartCustomerReference($newshopCartCustomerReference);
+       		$this->setshopCartProfileID($newShopCartProfileID);
+				$this->setshopCartProductMrfNumID($newShopCartProductMrfNumID);
+				$this->setshopCartQuantity($newShopCartQuantity);
+				$this->setshopCartPartNumber($newShopCartPartNumber);
+				$this->setshopCartCustomerReference($newShopCartCustomerReference);
 			}
 			    //determine what exception type was thrown
 			 catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
@@ -78,13 +78,13 @@ class shopping_cart  {
 
 	    /**
 		  * mutator method for shopCartProfile ID
-		  * @param Uuid | string $newshopCartProfileID new value of shopCartProfile ID
-		  * @throws \ RangeException if $newshopCartProfileID is not positive
+		  * @param Uuid | string $newShopCartProfileID new value of shopCartProfile ID
+		  * @throws \ RangeException if $newShopCartProfileID is not positive
 		  * @throws \ TypeError if $newshopCartProfileID is not a uuid or string
 		  **/
-	    public function setshopCartProfileID($newshopCartProfileID) : void {
+	    public function setShopCartProfileID($newShopCartProfileID) : void {
 			 try {
-				 $uuid = self::validatedUnid($newshopCartProfileID);
+				 $uuid = self::validatedUnid($newShopCartProfileID);
 			 } catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
 			 $exception) {
 
@@ -98,30 +98,30 @@ class shopping_cart  {
 	 * accessor method for shopCartProductMrfNum ID
 	 * @return string value of shopCartProductMrfNum ID
 	 */
-	public function getshopCartProductMrfNumID(): string{
+	public function getShopCartProductMrfNumID(): string{
 		return ($this->shopCartProductMrfNumID);
 	}
 
 	/** mutator method for shopCartProductMrfNumID
-	 * @param string $newshopCartProductMrfNumID new value of Product part Number
-	 * @throws \InvalidArgumentException if $newshopCartProductMrfNumID is not a string or insecure
-	 * @throws \RangeException if $newshopCartProductMrfNumID is >64 characters
+	 * @param string $newShopCartProductMrfNumID new value of Product part Number
+	 * @throws \InvalidArgumentException if $newShopCartProductMrfNumID is not a string or insecure
+	 * @throws \RangeException if $newShopCartProductMrfNumID is >64 characters
 	 */
-	public function setshopCartProductMrfNumID(string $newshopCartProductMrfNumID): void {
+	public function setShopCartProductMrfNumID(string $newShopCartProductMrfNumID): void {
 		// verify the setShopCartProductMrfNumID content is secure
-		$newshopCartProductMrfNumID = trim($newshopCartProductMrfNumID);
-		$newshopCartProductMrfNumID = filter_var($newshopCartProductMrfNumID, FILTER_SANITIZE_STRING,
+		$newShopCartProductMrfNumID = trim($newShopCartProductMrfNumID);
+		$newShopCartProductMrfNumID = filter_var($newShopCartProductMrfNumID, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newshopCartProductMrfNumID) === true) {
+		if(empty($newShopCartProductMrfNumID) === true) {
 			throw(new \InvalidArgumentException ("Part number content is empty or insecure"));
 		}
 		//verify the mrf number will fit in the datebase
-		if(strlen($newshopCartProductMrfNumID)>= 64){
+		if(strlen($newShopCartProductMrfNumID)>= 64){
 			throw(new \RangeException("Mrf part number is to long"));
 		}
 
 		//* store the Mrf part number
-		$this->shopCartProductMrfNumID = $newshopCartProductMrfNumID;
+		$this->shopCartProductMrfNumID = $newShopCartProductMrfNumID;
 
 	}
 
@@ -129,60 +129,60 @@ class shopping_cart  {
 	 * accessor method for shop Cart Quantity
 	 * @return string value of shopCartQuantity
 	 */
-	public function getshopCartQuantity(): string {
+	public function getShopCartQuantity(): string {
 		return ($this->shopCartQuantity);
 	}
 
 	/** mutator method for shopCartProductMrfNumID
-	 * @param string $newshopCartQuantity new value of Product Mrf part Number
-	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
-	 * @throws \RangeException if $newshopCartQuantity is >16 characters
+	 * @param string $newShopCartQuantity new value of Product Mrf part Number
+	 * @throws \InvalidArgumentException if $newShopCartQuantity is not a string or insecure
+	 * @throws \RangeException if $newShopCartQuantity is >16 characters
 	 */
-	public function setShopCartQuantity(string $newshopCartQuantity): void {
+	public function setShopCartQuantity(string $newShopCartQuantity): void {
 		// verify the quantity is secure
-		$newshopCartQuantity = trim($newshopCartQuantity);
-		$newshopCartQuantity = filter_var($newshopCartQuantity, FILTER_SANITIZE_STRING,
+		$newShopCartQuantity = trim($newShopCartQuantity);
+		$newShopCartQuantity = filter_var($newShopCartQuantity, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-      if(empty($newshopCartQuantity) === true) {
+      if(empty($newShopCartQuantity) === true) {
       	throw (new \InvalidArgumentException(" Specify quantity need"));
 		}
 
 		// verify the quantity content will fit in the database
-		if(strlen($newshopCartQuantity) >= 16) {
+		if(strlen($newShopCartQuantity) >= 16) {
 			throw(new \RangeException("quantity is to large contact digikey"));
 		}
 		//store shopCartQuantity content
-		$this->shopCartQuantity = $newshopCartQuantity;
+		$this->shopCartQuantity = $newShopCartQuantity;
 	}
 
 	/**
 	 * accessor method for shop Cart part number
 	 * @return string value of shopCartPartNumber
 	 */
-	public function getshopCartPartNumber(): string {
+	public function getShopCartPartNumber(): string {
 		return ($this->shopCartPartNumber);
 	}
 
 	/** mutator method for shopCartPartNumber
-	 * @param string $newshopCartPartNumber new value of shop Cart digkey Part Number
-	 * @throws \InvalidArgumentException if $newshopCartQuantity is not a string or insecure
-	 * @throws \RangeException if $newshopCartPartNumber is >16 characters
+	 * @param string $newShopCartPartNumber new value of shop Cart digkey Part Number
+	 * @throws \InvalidArgumentException if $newShopCartQuantity is not a string or insecure
+	 * @throws \RangeException if $newShopCartPartNumber is >16 characters
 	 */
-	public function setShopCartPartNumber(string $newshopCartPartNumber) : void {
+	public function setShopCartPartNumber(string $newShopCartPartNumber) : void {
 		//verify the shop cart part number
-		$newShopCartPartNumber = trim($newshopCartPartNumber);
+		$newShopCartPartNumber = trim($newShopCartPartNumber);
 		$newShopCartPartNumber = filter_var($newShopCartPartNumber, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newshopCartPartNumber) ===true){
+		if(empty($newShopCartPartNumber) ===true){
 			throw(new \InvalidArgumentException("Enter part number"));
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(strlen($newshopCartPartNumber) >= 16){
+		if(strlen($newShopCartPartNumber) >= 16){
 			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
-		$this->shopCartPartNumber = $newshopCartPartNumber;
+		$this->shopCartPartNumber = $newShopCartPartNumber;
 	}
 
 
@@ -190,30 +190,30 @@ class shopping_cart  {
 	 * accessor method for shop Cart Customer Ref number
 	 * @return string value of  shopCartCustomerReferenc
 	 */
-	public function getshopCartCustomerReference(): string {
+	public function getShopCartCustomerReference(): string {
 		return ($this-> shopCartCustomerReference);
 	}
 
 	/** mutator method for  shopCartCustomerReference
-	 * @param string $newshopCartCustomerReference new value of customer Ref number
-	 * @throws \InvalidArgumentException if $newshopCartCustomerReference is not a string or insecure
-	 * @throws \RangeException if $newshopCartCustomerReference is >64 characters
+	 * @param string $newShopCartCustomerReference new value of customer Ref number
+	 * @throws \InvalidArgumentException if $newShopCartCustomerReference is not a string or insecure
+	 * @throws \RangeException if $newShopCartCustomerReference is >64 characters
 	 */
-	public function setshopCartCustomerReference(string $newshopCartCustomerReference) : void {
+	public function setShopCartCustomerReference(string $newShopCartCustomerReference) : void {
 		//verify the customer reference number
-		$newshopCartCustomerReference = trim($newshopCartCustomerReference);
-		$newshopCartCustomerReference = filter_var($newshopCartCustomerReference, FILTER_SANITIZE_STRING,
+		$newShopCartCustomerReference = trim($newShopCartCustomerReference);
+		$newShopCartCustomerReference = filter_var($newShopCartCustomerReference, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($$newshopCartCustomerReference) ===true){
+		if(empty($newShopCartCustomerReference) ===true){
 			throw(new \InvalidArgumentException("Need Reference number"));
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(strlen($$newshopCartCustomerReference) >= 64){
+		if(strlen($$newShopCartCustomerReference) >= 64){
 			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
-		$this->shopCartPartNumber = $$newshopCartCustomerReference;
+		$this->shopCartPartNumber = $$newShopCartCustomerReference;
 	}
 }
 
