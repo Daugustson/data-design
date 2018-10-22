@@ -1,7 +1,8 @@
 <?php
 namespace daugustson\datadesign;
 
-require_once(dirname(__DIR__, 2) . "/classes/autoload.php");
+require_once ("autoload.php");
+require_once(dirname(__FILE__. "/autoload.php"));
 
 
 use Ramsey\Uuid\Uuid;
