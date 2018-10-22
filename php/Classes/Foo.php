@@ -85,7 +85,7 @@ class shopping_cart  {
 		  **/
 	    public function setShopCartProfileID($newShopCartProfileID) : void {
 			 try {
-				 $uuid = self::validateUuid($newShopCartProfileID);
+				 $uuid = self::ValidateUuid($newShopCartProfileID);
 			 } catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
 			 $exception) {
 
