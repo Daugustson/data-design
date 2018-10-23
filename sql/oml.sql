@@ -36,4 +36,8 @@ from shopping_cart inner join product on shopping_cart.shopCartProductMrfNumID =
 where shopCartProfileID = (unhex("3ba1986d841749b5955e3115a5d44a83"));
 
 
-
+select tweet.tweetContent, count(like.likeTweetId) as likes
+from like inner join tweet
+		  on like.likeTweetId = tweet.tweetId
+where likeTweetId = (unhex ("5f6f37e42cd24249ab6f8430542c1332")
+	group by tweet.tweetContent;

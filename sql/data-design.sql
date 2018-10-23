@@ -1,6 +1,6 @@
 ALTER DATABASE daugustson CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-DROP TABLE IF EXISTS shopping_cart;
+DROP TABLE IF EXISTS shoppingCart;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS profile;
 
@@ -29,7 +29,7 @@ CREATE TABLE product (
       PRIMARY KEY (productMrfNumID)
 );
 
-CREATE TABLE shopping_cart (
+CREATE TABLE shoppingCart (
       shopCartProfileID BINARY(16),
       shopCartProductMrfNumID VARCHAR(64),
       shopCartQuantity VARCHAR(16),

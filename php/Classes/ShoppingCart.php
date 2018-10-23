@@ -8,7 +8,7 @@ require_once(dirname(__FILE__. "/autoload.php"));
 use Ramsey\Uuid\Uuid;
 
 
-class shopping_cart  {
+class shoppingCart  {
 	use ValidateUuid;
 
 
@@ -53,14 +53,14 @@ class shopping_cart  {
 		  * @throws \TypeError if data types violate type hints
 		  * @throws \Exception if some other exception occurs
 		  */
-       public function _construct($newShopCartProfileID, $newShopCartProductMrfNumID, $newShopCartQuantity,
+       public function __construct($newShopCartProfileID, $newShopCartProductMrfNumID, $newShopCartQuantity,
 											 $newShopCartPartNumber, $newShopCartCustomerReference){
        	try {
-       		$this->setshopCartProfileID($newShopCartProfileID);
-				$this->setshopCartProductMrfNumID($newShopCartProductMrfNumID);
-				$this->setshopCartQuantity($newShopCartQuantity);
-				$this->setshopCartPartNumber($newShopCartPartNumber);
-				$this->setshopCartCustomerReference($newShopCartCustomerReference);
+       		$this->setShopCartProfileID($newShopCartProfileID);
+				$this->setShopCartProductMrfNumID($newShopCartProductMrfNumID);
+				$this->setShopCartQuantity($newShopCartQuantity);
+				$this->setShopCartPartNumber($newShopCartPartNumber);
+				$this->setShopCartCustomerReference($newShopCartCustomerReference);
 			}
 			    //determine what exception type was thrown
 			 catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
