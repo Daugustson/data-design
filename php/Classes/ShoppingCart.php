@@ -8,11 +8,11 @@ require_once(dirname(__DIR__,2). "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 
 
-class ShoppingCart  {
+class ShoppingCart {
 	use ValidateUuid;
 
 
-      /**
+	   /**
 		 * *this ID for the shopCartProfile:
 		 * this is a foreign key that is references to
 		 * profile(profileID)
@@ -219,14 +219,38 @@ class ShoppingCart  {
 	}
 }
 
+
 //******************************************************************************************************
 
+/**
+ * inserts this MFR part number
+ * @param \PDO $PDO PDO connection object
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError if $pdo is not a PDO connection object
+ */
+public function insert(\PDO $pdo) : void {
 
+	//create query template
+	$query = "INSERT INTO ShoppingCart(shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference)
+VALUES(:shopCartProfileID, :shopCartProductMrfNumID, :shopCartQuantity, :shopCartPartNumber, :shopCartCustomerReference)";
+	$statemate = $pdo->prepare($query);
 
+	// bind the member variables to the place holders in the template
+	$paramers = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(),
+	"shopCartProductMrfNumID"=>$this->shopCartProductMrfNumID,
+	"shopCartQuantity"=>$this->shopCartQuantity,
+	"shopCartPartNumber"=>$this->shopCartPartNumber,
+	"shopCartCustomerReference"=>$this->hopCartCustomerReference];
+	     $statemate->execute($parameters);
 
-
-
+}
 
 
 
 ?>
+
+
+
+
+
+
