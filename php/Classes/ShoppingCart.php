@@ -1,7 +1,7 @@
 <?php
 namespace daugustson\datadesign;
 
-
+require_once("autoload.php");
 require_once(dirname(__DIR__,2). "/vendor/autoload.php");
 
 
@@ -211,11 +211,22 @@ class ShoppingCart  {
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(strlen($$newShopCartCustomerReference) >= 64){
+		if(strlen($newShopCartCustomerReference) >= 64){
 			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
-		$this->shopCartPartNumber = $$newShopCartCustomerReference;
+		$this->shopCartCustomerReference = $newShopCartCustomerReference;
 	}
 }
+
 //******************************************************************************************************
+
+
+
+
+
+
+
+
+
+?>

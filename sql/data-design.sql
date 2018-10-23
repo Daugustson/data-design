@@ -29,7 +29,7 @@ CREATE TABLE product (
       PRIMARY KEY (productMrfNumID)
 );
 
-CREATE TABLE shoppingCart (
+CREATE TABLE ShoppingCart (
       shopCartProfileID BINARY(16),
       shopCartProductMrfNumID VARCHAR(64),
       shopCartQuantity VARCHAR(16),
