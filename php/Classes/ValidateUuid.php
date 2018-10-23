@@ -29,7 +29,7 @@ trait ValidateUuid {
 	 * @throws \InvalidArgumentException if $newUuid is not a valid uuid
 	 * @throws \RangeException if $newUuid is not a valid uuid v4
 	 **/
-	private static function ValidateUuid($newUuid) : Uuid {
+	private static function validateUuid($newUuid) : Uuid {
 		// verify a string uuid
 		if(gettype($newUuid) === "string") {
 			// 16 characters is binary data from mySQL - convert to string and fall to next if block

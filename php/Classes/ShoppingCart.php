@@ -65,8 +65,8 @@ class ShoppingCart  {
 			    //determine what exception type was thrown
 			 catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
 			 $exception) {
-       		$exceptiontype = get_class($exception);
-       		throw(new $exceptiontype($exception->getMessage(), 0, $exception));
+       		$exceptionType = get_class($exception);
+       		throw(new $exceptionType($exception->getMessage(), 0, $exception));
 			 }
        }
 		 /**
@@ -85,13 +85,14 @@ class ShoppingCart  {
 		  **/
 	    public function setShopCartProfileID($newShopCartProfileID) : void {
 			 try {
-				 $uuid = self::ValidateUuid($newShopCartProfileID);
-			 } catch(\InvalidArgumentException | \RangeException | \TypeError | \Exception
+				 $uuid = self::validateUuid($newShopCartProfileID);
+			 } catch(\InvalidArgumentException | \RangeException | \Exception  | \TypeError
 			 $exception) {
-
+			 	$exceptionType = get_class($exception);
+			 	throw(new $exceptionType($exception->getMessage(), 0, $exception));
 			 }
 			 // convert and store for shopCartProfile ID
-			 $this->ShopCartProfileID = $uuid;
+			 $this->shopCartProfileID = $uuid;
 
 		 }
 
@@ -161,7 +162,7 @@ class ShoppingCart  {
 	 * @return string value of shopCartPartNumber
 	 */
 	public function getShopCartPartNumber(): string {
-		return ($this->shopCartPartNumber);
+		return($this->shopCartPartNumber);
 	}
 
 	/** mutator method for shopCartPartNumber
@@ -192,7 +193,7 @@ class ShoppingCart  {
 	 * @return string value of  shopCartCustomerReferenc
 	 */
 	public function getShopCartCustomerReference(): string {
-		return ($this-> shopCartCustomerReference);
+		return($this->shopCartCustomerReference);
 	}
 
 	/** mutator method for  shopCartCustomerReference
@@ -217,4 +218,4 @@ class ShoppingCart  {
 		$this->shopCartPartNumber = $$newShopCartCustomerReference;
 	}
 }
-
+//******************************************************************************************************
