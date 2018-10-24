@@ -279,19 +279,52 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 		 $parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(),"shopCartProductMrfNumID"=> $this->shopCartProductMrfNumID,
 			 "shopCartQuantity"=>$this->shopCartQuantity, "shopCartPartNumber"=>$this->shopCartPartNumber, "shopCartCustomerReference"=>$this->shopCartCustomerReference ];
 		 $statment->execute($parameters);
-
-
 	}
 
+	/**
+	 * get the shopping cart by shopping cart customer reference
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $shopCartProductMrfNumID content to search for
+	 * @return \SplFixedArray SplFixedArray of shopping cart found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getShoppingCartByShopCartCustomerReference(\PDO $pdo, string $shopCartCustomerReference) : \SplFixedArray {
+		//sanitize the description before searching
+		$shopCartCustomerReference = trim($shopCartCustomerReference);
+		$shopCartCustomerReference = filter_var($shopCartCustomerReference, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($shopCartCustomerReference) === true) {
+			throw(new \PDOException("customer reference is invalid"));
+		}
+		//escape any mySQL wild cards
+		$shopCartCustomerReference = str_replace("_","\\_", str_replace("%","\\%", $shopCartCustomerReference));
 
+		//create query template
+		$query = "SELECT shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference
+		FROM  ShoppingCart WHERE shopCartCustomerReference like :shopCartCustomerReference";
+		$statement = $pdo->prepare($query);
+
+		//bind the shopCartCustomerReference to the place holder in the template
+		$shopCartCustomerReference = "%$shopCartCustomerReference%";
+		$parameters = ["shopCartCustomerReference"=> $shopCartCustomerReference];
+		$statement->execute($parameters);
+
+		//build an array of shopping carts
+		$ShoppingCarts new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement)
+	}
 
 
 }
 
-
-
 ?>
 
+shopCartProfileID" => $this->shopCartProfileID->getBytes(),
+"shopCartProductMrfNumID"=>$this->shopCartProductMrfNumID,
+"shopCartQuantity"=>$this->shopCartQuantity,
+"shopCartPartNumber"=>$this->shopCartPartNumber,
+"shopCartCustomerReference"=>$this->shopCartCustomerReference];
 
 
 
