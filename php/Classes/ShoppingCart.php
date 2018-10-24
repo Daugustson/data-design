@@ -8,7 +8,7 @@ require_once(dirname(__DIR__,2). "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 
 
-class ShoppingCart {
+class ShoppingCart implements \JsonSerializable {
 	use ValidateUuid;
 
 
@@ -310,7 +310,7 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 		$statement->execute($parameters);
 
 		//build an array of shopping carts
-		$ShoppingCarts new \SplFixedArray($statement->rowCount());
+		$ShoppingCarts = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false); {
 			try {
@@ -324,6 +324,45 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 			}
 		}
 		return($ShoppingCarts);
+	}
+	/**
+	 * gets all shopping carts
+	 * @return \SplFixedArray SplFixedArray of Tweets found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 */
+	public static function getAllShoppingCarts(\PDO $pdo) : \SplFixedArray {
+		//create query template
+		$query = "SELECT  shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference FROM ShoppingCart";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		//build an array of shopping carts
+		$ShoppingCarts = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !==false) {
+			try{
+				$ShoppingCart = new ShoppingCart(newSh, newsh, newSh, newShop, newShop);
+				$ShoppingCarts[$ShoppingCarts->key()] = $ShoppingCart;
+				$ShoppingCarts->next();
+			} catch(\Exception $exception){
+				//fi the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($ShoppingCarts);
+
+		/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() : array {
+		$fields = get_object_vars($this);
+
+		$fields["shoppingCartProfileID"] = $this->shoppingCartProfileID->toString();
+
+		return($fields);
 	}
 
 
