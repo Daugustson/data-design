@@ -273,8 +273,12 @@ public function delete(\PDO $pdo) : void {
 
 		//create query template
 		 $query = "UPDATE ShoppingCart SET shopCartProductMrfNumID = :shopCartProductMrfNumID, shopCartQuantity = :shopCartQuantity,
-shopCartPartNumber = :shopCartPartNumber, shopCartPartNumber = :shopCartPartNumber WHERE shopCartProfileID = :shopCartProfileID ";
+shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartCustomerReference WHERE shopCartProfileID = :shopCartProfileID ";
 		 $statment = $pdo->prepare($query);
+
+		 $parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(),"shopCartProductMrfNumID"=> $this->shopCartProductMrfNumID,
+			 "shopCartQuantity"=>$this->shopCartQuantity, "shopCartPartNumber"=>$this->shopCartPartNumber, "shopCartCustomerReference"=>$this->shopCartCustomerReference ];
+		 $statment->execute($parameters);
 
 
 	}
@@ -284,16 +288,6 @@ shopCartPartNumber = :shopCartPartNumber, shopCartPartNumber = :shopCartPartNumb
 
 }
 
-
-
-
-
-
-
-shopCartProductMrfNumID VARCHAR(64),
-      shopCartQuantity VARCHAR(16),
-      shopCartPartNumber VARCHAR(16),
-      shopCartPartNumber VARCHAR(64),
 
 
 ?>
