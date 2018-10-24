@@ -312,7 +312,18 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 		//build an array of shopping carts
 		$ShoppingCarts new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement)
+		while(($row = $statement->fetch()) !== false); {
+			try {
+				$ShoppingCart = new ShoppingCart(newSh, newsho, newsho, newsh,
+					newShop);
+				$ShoppingCarts[$ShoppingCarts->key()] = $ShoppingCart;
+				$ShoppingCarts->next();
+			} catch(\Exception $exception){
+				//if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($ShoppingCarts);
 	}
 
 
@@ -320,11 +331,6 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 
 ?>
 
-shopCartProfileID" => $this->shopCartProfileID->getBytes(),
-"shopCartProductMrfNumID"=>$this->shopCartProductMrfNumID,
-"shopCartQuantity"=>$this->shopCartQuantity,
-"shopCartPartNumber"=>$this->shopCartPartNumber,
-"shopCartCustomerReference"=>$this->shopCartCustomerReference];
 
 
 
