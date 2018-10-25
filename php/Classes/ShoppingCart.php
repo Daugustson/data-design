@@ -2,7 +2,7 @@
 namespace daugustson\datadesign;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__,2). "/vendor/autoload.php");
+require_once(dirname(__DIR__,2) . "/classes/autoload.php");
 
 
 use Ramsey\Uuid\Uuid;
@@ -12,95 +12,95 @@ class ShoppingCart implements \JsonSerializable {
 	use ValidateUuid;
 
 
-	   /**
-		 * *this ID for the shopCartProfile:
-		 * this is a foreign key that is references to
-		 * profile(profileID)
-		 * @var Uuid shopCartProfileID
-		 */
-      private $shopCartProfileID;
-      /**
-		 * this ID is for the shopCartProductMrfNum:
-		 *this is a foreign key that is references to
-		 *product(productMrfNumID)
-		 * @var string shopCartProductMrfNumID
-		 */
-      private $shopCartProductMrfNumID;
-      /**
-		 * this is the quantity of product in the shopping cart
-		 * @var string
-		 */
-      private $shopCartQuantity;
+	/**
+	 * *this ID for the shopCartProfile:
+	 * this is a foreign key that is references to
+	 * profile(profileID)
+	 * @var Uuid shopCartProfileID
+	 */
+	private $shopCartProfileID;
+	/**
+	 * this ID is for the shopCartProductMrfNum:
+	 *this is a foreign key that is references to
+	 *product(productMrfNumID)
+	 * @var string shopCartProductMrfNumID
+	 */
+	private $shopCartProductMrfNumID;
+	/**
+	 * this is the quantity of product in the shopping cart
+	 * @var string
+	 */
+	private $shopCartQuantity;
 	/**
 	 * this is the part number for the product in the shopping cart
 	 * @var string
 	 */
-	    private $shopCartPartNumber;
+	private $shopCartPartNumber;
 	/**
 	 *this is the customer reference for this order.
 	 * @var string
 	 */
-       private $shopCartCustomerReference;
+	private $shopCartCustomerReference;
 
-       /**
-		  * @param string|Uuid $shopCartProfileID id of the profile ID
-		  * @param string $shopCartProductMrfNumID id of the Mfr part number
-		  * @param string $shopCartQuantity string amount of product in shopping cart
-		  * @param string $shopCartPartNumber string digkey part/config you have in your cart
-		  * @param string $shopCartCustomerReference string customer order ref number
-		  * @throws \InvalidArgumentException if data types are not valid
-		  * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
-		  * @throws \TypeError if data types violate type hints
-		  * @throws \Exception if some other exception occurs
-		  */
-       public function __construct($newShopCartProfileID, $newShopCartProductMrfNumID, $newShopCartQuantity,
-											 $newShopCartPartNumber, $newShopCartCustomerReference){
-       	try {
-       		$this->setShopCartProfileID($newShopCartProfileID);
-				$this->setShopCartProductMrfNumID($newShopCartProductMrfNumID);
-				$this->setShopCartQuantity($newShopCartQuantity);
-				$this->setShopCartPartNumber($newShopCartPartNumber);
-				$this->setShopCartCustomerReference($newShopCartCustomerReference);
-			}
-			    //determine what exception type was thrown
-			 catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError
-			 $exception) {
-       		$exceptionType = get_class($exception);
-       		throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			 }
-       }
-		 /**
-		  * accessor method for shopCartProfile ID
-		  * @return Uuid value of shopCartProfile ID
-		  */
-	    public function getShopCartProfileID(): Uuid {
+	/**
+	 * @param string|Uuid $shopCartProfileID id of the profile ID
+	 * @param string $shopCartProductMrfNumID id of the Mfr part number
+	 * @param string $shopCartQuantity string amount of product in shopping cart
+	 * @param string $shopCartPartNumber string digkey part/config you have in your cart
+	 * @param string $shopCartCustomerReference string customer order ref number
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
+	 */
+	public function __construct($newShopCartProfileID, $newShopCartProductMrfNumID, $newShopCartQuantity,
+										 $newShopCartPartNumber, $newShopCartCustomerReference) {
+		try {
+			$this->setShopCartProfileID($newShopCartProfileID);
+			$this->setShopCartProductMrfNumID($newShopCartProductMrfNumID);
+			$this->setShopCartQuantity($newShopCartQuantity);
+			$this->setShopCartPartNumber($newShopCartPartNumber);
+			$this->setShopCartCustomerReference($newShopCartCustomerReference);
+		} //determine what exception type was thrown
+		catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError
+		$exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+	}
+
+	/**
+	 * accessor method for shopCartProfile ID
+	 * @return Uuid value of shopCartProfile ID
+	 */
+	public function getShopCartProfileID(): Uuid {
 		return ($this->shopCartProfileID);
-	    }
+	}
 
-	    /**
-		  * mutator method for shopCartProfile ID
-		  * @param Uuid | string $newShopCartProfileID new value of shopCartProfile ID
-		  * @throws \ RangeException if $newShopCartProfileID is not positive
-		  * @throws \ TypeError if $newshopCartProfileID is not a uuid or string
-		  **/
-	    public function setShopCartProfileID($newShopCartProfileID) : void {
-			 try {
-				 $uuid = self::validateUuid($newShopCartProfileID);
-			 } catch(\InvalidArgumentException | \RangeException | \Exception  | \TypeError
-			 $exception) {
-			 	$exceptionType = get_class($exception);
-			 	throw(new $exceptionType($exception->getMessage(), 0, $exception));
-			 }
-			 // convert and store for shopCartProfile ID
-			 $this->shopCartProfileID = $uuid;
+	/**
+	 * mutator method for shopCartProfile ID
+	 * @param Uuid | string $newShopCartProfileID new value of shopCartProfile ID
+	 * @throws \ RangeException if $newShopCartProfileID is not positive
+	 * @throws \ TypeError if $newshopCartProfileID is not a uuid or string
+	 **/
+	public function setShopCartProfileID($newShopCartProfileID): void {
+		try {
+			$uuid = self::validateUuid($newShopCartProfileID);
+		} catch(\InvalidArgumentException | \RangeException | \Exception  | \TypeError
+		$exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+		// convert and store for shopCartProfile ID
+		$this->shopCartProfileID = $uuid;
 
-		 }
+	}
 
 	/**
 	 * accessor method for shopCartProductMrfNum ID
 	 * @return string value of shopCartProductMrfNum ID
 	 */
-	public function getShopCartProductMrfNumID(): string{
+	public function getShopCartProductMrfNumID(): string {
 		return ($this->shopCartProductMrfNumID);
 	}
 
@@ -118,7 +118,7 @@ class ShoppingCart implements \JsonSerializable {
 			throw(new \InvalidArgumentException ("Part number content is empty or insecure"));
 		}
 		//verify the mrf number will fit in the datebase
-		if(strlen($newShopCartProductMrfNumID)>= 64){
+		if(strlen($newShopCartProductMrfNumID) >= 64) {
 			throw(new \RangeException("Mrf part number is to long"));
 		}
 
@@ -145,8 +145,8 @@ class ShoppingCart implements \JsonSerializable {
 		$newShopCartQuantity = trim($newShopCartQuantity);
 		$newShopCartQuantity = filter_var($newShopCartQuantity, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-      if(empty($newShopCartQuantity) === true) {
-      	throw (new \InvalidArgumentException(" Specify quantity need"));
+		if(empty($newShopCartQuantity) === true) {
+			throw (new \InvalidArgumentException(" Specify quantity need"));
 		}
 
 		// verify the quantity content will fit in the database
@@ -162,7 +162,7 @@ class ShoppingCart implements \JsonSerializable {
 	 * @return string value of shopCartPartNumber
 	 */
 	public function getShopCartPartNumber(): string {
-		return($this->shopCartPartNumber);
+		return ($this->shopCartPartNumber);
 	}
 
 	/** mutator method for shopCartPartNumber
@@ -170,17 +170,17 @@ class ShoppingCart implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if $newShopCartQuantity is not a string or insecure
 	 * @throws \RangeException if $newShopCartPartNumber is >16 characters
 	 */
-	public function setShopCartPartNumber(string $newShopCartPartNumber) : void {
+	public function setShopCartPartNumber(string $newShopCartPartNumber): void {
 		//verify the shop cart part number
 		$newShopCartPartNumber = trim($newShopCartPartNumber);
 		$newShopCartPartNumber = filter_var($newShopCartPartNumber, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newShopCartPartNumber) ===true){
+		if(empty($newShopCartPartNumber) === true) {
 			throw(new \InvalidArgumentException("Enter part number"));
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(strlen($newShopCartPartNumber) >= 16){
+		if(strlen($newShopCartPartNumber) >= 16) {
 			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
@@ -193,7 +193,7 @@ class ShoppingCart implements \JsonSerializable {
 	 * @return string value of  shopCartCustomerReferenc
 	 */
 	public function getShopCartCustomerReference(): string {
-		return($this->shopCartCustomerReference);
+		return ($this->shopCartCustomerReference);
 	}
 
 	/** mutator method for  shopCartCustomerReference
@@ -201,17 +201,17 @@ class ShoppingCart implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if $newShopCartCustomerReference is not a string or insecure
 	 * @throws \RangeException if $newShopCartCustomerReference is >64 characters
 	 */
-	public function setShopCartCustomerReference(string $newShopCartCustomerReference) : void {
+	public function setShopCartCustomerReference(string $newShopCartCustomerReference): void {
 		//verify the customer reference number
 		$newShopCartCustomerReference = trim($newShopCartCustomerReference);
 		$newShopCartCustomerReference = filter_var($newShopCartCustomerReference, FILTER_SANITIZE_STRING,
 			FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newShopCartCustomerReference) ===true){
+		if(empty($newShopCartCustomerReference) === true) {
 			throw(new \InvalidArgumentException("Need Reference number"));
 		}
 
 		//verify the shop cart part number will fit in the date base
-		if(strlen($newShopCartCustomerReference) >= 64){
+		if(strlen($newShopCartCustomerReference) >= 64) {
 			throw(new \RangeException("part number is too long"));
 		}
 		//store the part number
@@ -222,44 +222,44 @@ class ShoppingCart implements \JsonSerializable {
 
 //******************************************************************************************************
 
-/**
- * inserts this MFR part number into mySQL
- * @param \PDO $PDO PDO connection object
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError if $pdo is not a PDO connection object
- **/
-public function insert(\PDO $pdo) : void {
+	/**
+	 * inserts this MFR part number into mySQL
+	 * @param \PDO $PDO PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo): void {
 
-	//create query template
-	$query = "INSERT INTO ShoppingCart(shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference)
+		//create query template
+		$query = "INSERT INTO ShoppingCart(shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference)
 VALUES(:shopCartProfileID, :shopCartProductMrfNumID, :shopCartQuantity, :shopCartPartNumber, :shopCartCustomerReference)";
-	$statemate = $pdo->prepare($query);
+		$statemate = $pdo->prepare($query);
 
-	// bind the member variables to the place holders in the template
-	$parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(),
-	"shopCartProductMrfNumID"=>$this->shopCartProductMrfNumID,
-	"shopCartQuantity"=>$this->shopCartQuantity,
-	"shopCartPartNumber"=>$this->shopCartPartNumber,
-	"shopCartCustomerReference"=>$this->shopCartCustomerReference];
-	     $statemate->execute($parameters);
-}
+		// bind the member variables to the place holders in the template
+		$parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(),
+			"shopCartProductMrfNumID" => $this->shopCartProductMrfNumID,
+			"shopCartQuantity" => $this->shopCartQuantity,
+			"shopCartPartNumber" => $this->shopCartPartNumber,
+			"shopCartCustomerReference" => $this->shopCartCustomerReference];
+		$statemate->execute($parameters);
+	}
 
-/**
- *deletes this shopping cart from mySQL
- * @param \PDO $pdo PDO connection object
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError if $pdo is not a PDO connection object
- */
-public function delete(\PDO $pdo) : void {
+	/**
+	 *deletes this shopping cart from mySQL
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
+	public function delete(\PDO $pdo): void {
 
-	//create query template
-	$query = "DELETE FROM ShoppingCart WHERE shopCartProfileID = : shopCartProfileID";
-	$statement = $pdo->prepare($query);
+		//create query template
+		$query = "DELETE FROM ShoppingCart WHERE shopCartProfileID = : shopCartProfileID";
+		$statement = $pdo->prepare($query);
 
-	//bind the member variables to the place holder in the template
-	$parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes()];
+		//bind the member variables to the place holder in the template
+		$parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes()];
 		$statement->execute($parameters);
-}
+	}
 
 	/**
 	 * updates this shopping cart in mySQL
@@ -269,16 +269,16 @@ public function delete(\PDO $pdo) : void {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 
-	public function update(\PDO $pdo) : void {
+	public function update(\PDO $pdo): void {
 
 		//create query template
-		 $query = "UPDATE ShoppingCart SET shopCartProductMrfNumID = :shopCartProductMrfNumID, shopCartQuantity = :shopCartQuantity,
+		$query = "UPDATE ShoppingCart SET shopCartProductMrfNumID = :shopCartProductMrfNumID, shopCartQuantity = :shopCartQuantity,
 shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartCustomerReference WHERE shopCartProfileID = :shopCartProfileID ";
-		 $statment = $pdo->prepare($query);
+		$statment = $pdo->prepare($query);
 
-		 $parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(),"shopCartProductMrfNumID"=> $this->shopCartProductMrfNumID,
-			 "shopCartQuantity"=>$this->shopCartQuantity, "shopCartPartNumber"=>$this->shopCartPartNumber, "shopCartCustomerReference"=>$this->shopCartCustomerReference ];
-		 $statment->execute($parameters);
+		$parameters = ["shopCartProfileID" => $this->shopCartProfileID->getBytes(), "shopCartProductMrfNumID" => $this->shopCartProductMrfNumID,
+			"shopCartQuantity" => $this->shopCartQuantity, "shopCartPartNumber" => $this->shopCartPartNumber, "shopCartCustomerReference" => $this->shopCartCustomerReference];
+		$statment->execute($parameters);
 	}
 
 	/**
@@ -289,7 +289,7 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getShoppingCartByShopCartCustomerReference(\PDO $pdo, string $shopCartCustomerReference) : \SplFixedArray {
+	public static function getShoppingCartByShopCartCustomerReference(\PDO $pdo, string $shopCartCustomerReference): \SplFixedArray {
 		//sanitize the description before searching
 		$shopCartCustomerReference = trim($shopCartCustomerReference);
 		$shopCartCustomerReference = filter_var($shopCartCustomerReference, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -297,7 +297,7 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 			throw(new \PDOException("customer reference is invalid"));
 		}
 		//escape any mySQL wild cards
-		$shopCartCustomerReference = str_replace("_","\\_", str_replace("%","\\%", $shopCartCustomerReference));
+		$shopCartCustomerReference = str_replace("_", "\\_", str_replace("%", "\\%", $shopCartCustomerReference));
 
 		//create query template
 		$query = "SELECT shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference
@@ -306,32 +306,33 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 
 		//bind the shopCartCustomerReference to the place holder in the template
 		$shopCartCustomerReference = "%$shopCartCustomerReference%";
-		$parameters = ["shopCartCustomerReference"=> $shopCartCustomerReference];
+		$parameters = ["shopCartCustomerReference" => $shopCartCustomerReference];
 		$statement->execute($parameters);
 
 		//build an array of shopping carts
 		$ShoppingCarts = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false); {
+		while(($row = $statement->fetch()) !== false) ;
+		{
 			try {
-				$ShoppingCart = new ShoppingCart(newSh, newsho, newsho, newsh,
-					newShop);
+				$ShoppingCart = new ShoppingCart($row["shopCartProfileID"], $row["shopCartProductMrfNumID"], $row["shopCartQuantity"], $row["shopCartPartNumber"], $row["shopCartCustomerReference"]);
 				$ShoppingCarts[$ShoppingCarts->key()] = $ShoppingCart;
 				$ShoppingCarts->next();
-			} catch(\Exception $exception){
+			} catch(\Exception $exception) {
 				//if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($ShoppingCarts);
+		return ($ShoppingCarts);
 	}
+
 	/**
 	 * gets all shopping carts
 	 * @return \SplFixedArray SplFixedArray of Tweets found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 */
-	public static function getAllShoppingCarts(\PDO $pdo) : \SplFixedArray {
+	public static function getAllShoppingCarts(\PDO $pdo): \SplFixedArray {
 		//create query template
 		$query = "SELECT  shopCartProfileID, shopCartProductMrfNumID, shopCartQuantity, shopCartPartNumber, shopCartCustomerReference FROM ShoppingCart";
 		$statement = $pdo->prepare($query);
@@ -340,33 +341,36 @@ shopCartPartNumber = :shopCartPartNumber, shopCartCustomerReference = :shopCartC
 		//build an array of shopping carts
 		$ShoppingCarts = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !==false) {
-			try{
-				$ShoppingCart = new ShoppingCart(newSh, newsh, newSh, newShop, newShop);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$ShoppingCart = new ShoppingCart($row["shopCartProfileID"], $row["shopCartProductMrfNumID"], $row["shopCartQuantity"], $row["shopCartPartNumber"], $row["shopCartCustomerReference"]);
 				$ShoppingCarts[$ShoppingCarts->key()] = $ShoppingCart;
 				$ShoppingCarts->next();
-			} catch(\Exception $exception){
+			} catch(\Exception $exception) {
 				//fi the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
 		return ($ShoppingCarts);
+		}
 
 		/**
-	 * formats the state variables for JSON serialization
-	 *
-	 * @return array resulting state variables to serialize
-	 **/
-	public function jsonSerialize() : array {
-		$fields = get_object_vars($this);
+		 * formats the state variables for JSON serialization
+		 *
+		 * @return array resulting state variables to serialize
+		 **/
+		public
+		function jsonSerialize(): array {
+			$fields = get_object_vars($this);
 
-		$fields["shoppingCartProfileID"] = $this->shoppingCartProfileID->toString();
+			$fields["shoppingCartProfileID"] = $this->shoppingCartProfileID->toString();
 
-		return($fields);
+			return ($fields);
+		}
+
+
 	}
 
-
-}
 
 ?>
 
